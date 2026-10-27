@@ -3,7 +3,7 @@ window.BIRTHDAY_CONFIG = {
   name: 'Lea',
   candles: 23,
   lightingIntervalMs: 330,
-  music: { trackUrl: 'https://soundcloud.com/nhoangton/danh-cho-em-full', title: 'Dành Cho Em', artist: 'Hoàng Tôn', volume: 30 },
+  music: { src: 'assets/danh-cho-em.mp3', title: 'Dành Cho Em', artist: 'Hoàng Tôn', volume: 30 },
   dateQuestion: 'Can I take you out for your birthday?',
   dateDetail: 'Something sweet, a little adventure, and you.',
   signature: 'Someone who wanted to make you smile',

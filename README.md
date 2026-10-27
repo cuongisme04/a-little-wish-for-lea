@@ -12,7 +12,7 @@ Edit `config.js`. It contains the name, candle count, lighting speed, birthday p
 
 Serve the repository root with any static HTTP server. Microphone access requires HTTPS or localhost. The microphone is requested only after pressing the blow button, is analyzed locally, and is released after the candles go out or when leaving the page. A tap option always works without microphone access.
 
-Music starts automatically when permitted by the browser, with a first-tap fallback. The candle page uses a native HTML audio player with autoplay enabled and a locally hosted, softly rendered Happy Birthday piano arrangement made from Salamander samples. If audible autoplay is blocked, the first tap anywhere starts it. This piano becomes quieter while listening for a blow. Entering the flower page switches to Hoàng Tôn’s SoundCloud recording of Dành Cho Em; it then continues across the flower, letter, date, and Yes pages and repeats if it ends. The volume slider controls the active theme. Browser autoplay policies may require a visitor interaction; the SoundCloud theme also needs internet access. Explicit pause/mute choices are preserved.
+Music starts automatically when permitted by the browser, with a first-tap fallback. The candle page uses a native HTML audio player with autoplay enabled and a locally hosted, softly rendered Happy Birthday piano arrangement made from Salamander samples. If audible autoplay is blocked, the first tap anywhere starts it. This piano becomes quieter while listening for a blow. Entering the flower page immediately switches to the supplied MP3 of Hoàng Tôn’s Dành Cho Em; it then continues across the flower, letter, date, and Yes pages and repeats if it ends. The volume slider controls the active theme. Browser autoplay policies may require a visitor interaction; the song is served directly with the website. Explicit pause/mute choices are preserved.
 
 ## Share and deploy
 
@@ -32,7 +32,7 @@ The Yes button displays a celebration and offers the visitor a native share shee
 - Flower artwork generated with the built-in ImageGen tool; the original prompt is in `ASSET-PROMPT.md`. No video frames or artwork were copied from the TikTok references.
 - Fonts: Google Fonts, with local system fallbacks.
 - Piano samples: Salamander Grand Piano by Alexander Holm, CC BY 3.0, via https://github.com/Tonejs/audio/tree/master/salamander. Attribution and license are included in `assets/piano/CREDITS.txt`. A new soft arrangement uses selected pitch-shifted samples.
-- Music: https://soundcloud.com/nhoangton/danh-cho-em-full. Playback uses the SoundCloud Widget API; no audio was downloaded or rehosted.
+- Music: Dành Cho Em by Hoàng Tôn, from the MP3 supplied by the site owner (`assets/danh-cho-em.mp3`). The same native audio element switches tracks directly in the flower-page click handler, with no embedded player or separate play step.
 
 ## Verification
 
