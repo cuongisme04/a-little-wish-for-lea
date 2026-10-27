@@ -9,7 +9,7 @@
   const sceneOrder = ['candles', 'flowers', 'letter', 'date'];
   let scene = 'candles';
   let unlocked = 0;
-  let candleState = 'lighting';
+  let candleState = 'ready';
   let lightingTimer;
   let blowTimers = [];
   let flowerTimers = [];
@@ -105,27 +105,44 @@
   makeCandles();
   const candles = [...$('candles').children];
 
-  function startLighting() {
+  function prepareCandles() {
     clearTimeout(lightingTimer);
     blowTimers.forEach(clearTimeout);
     blowTimers = [];
     stopMic();
-    candleState = 'lighting';
+    candleState = 'ready';
     candles.forEach((candle) => candle.classList.remove('lit', 'extinguished'));
     $('scene-candles').classList.remove('out');
-    $('countdown').hidden = false;
+    $('countdown').hidden = true;
     $('remaining').textContent = String(candleTotal);
     $('countdown-label').textContent = 'candles left to light';
-    $('lighting-progress').hidden = false;
+    $('lighting-progress').hidden = true;
     $('lighting-bar').style.width = '0%';
-    $('wish-instruction').textContent = 'One little light for every lovely year.';
-    $('mic-button').hidden = false;
+    $('wish-instruction').textContent = 'Ready for a little birthday magic?';
+    $('start-candles').hidden = false;
+    $('start-candles').disabled = false;
+    $('mic-button').hidden = true;
     $('mic-button').disabled = true;
     $('mic-label').textContent = 'Lighting your candles…';
-    $('tap-blow-button').hidden = false;
+    $('tap-blow-button').hidden = true;
     $('tap-blow-button').disabled = true;
     $('to-flowers').hidden = true;
+    $('micro-note').textContent = 'Tap to light your candles and start the music.';
+    announce('Your ' + candleTotal + ' birthday candles are ready. Tap Light my candles to begin.');
+  }
+
+  function startLighting() {
+    if (candleState !== 'ready') return;
+    candleState = 'lighting';
+    $('start-candles').hidden = true;
+    $('start-candles').disabled = true;
+    $('countdown').hidden = false;
+    $('lighting-progress').hidden = false;
+    $('wish-instruction').textContent = 'One little light for every lovely year.';
+    $('mic-button').hidden = false;
+    $('tap-blow-button').hidden = false;
     $('micro-note').textContent = 'No rush. This moment is yours.';
+    window.birthdayMusic.start();
     announce(candleTotal + ' birthday candles are lighting one by one for ' + name + '.');
     let lit = 0;
     function lightNext() {
@@ -557,9 +574,10 @@
     $('playful-caption').textContent = 'My last little birthday wish. ♡';
     unlock('candles');
     showScene('candles');
-    startLighting();
+    prepareCandles();
   }
 
+  $('start-candles').addEventListener('click', startLighting);
   $('mic-button').addEventListener('click', listenForBlow);
   $('tap-blow-button').addEventListener('click', finishWish);
   $('to-flowers').addEventListener('click', () => showScene('flowers'));
@@ -599,5 +617,5 @@
     else { if (scene === 'date') startNoRun(); }
   });
   window.addEventListener('pagehide', () => { stopMic(); stopNoRun(); });
-  startLighting();
+  prepareCandles();
 })();

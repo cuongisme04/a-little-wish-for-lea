@@ -4,7 +4,7 @@
   const $ = id => document.getElementById(id);
   const audio = $('theme-audio');
   const status = $('music-status');
-  let wanted = true, scene = 'candles', loadedTheme, ducked = false;
+  let wanted = true, started = false, scene = 'candles', loadedTheme, ducked = false;
   let volume = Math.max(0, Math.min(100, Number(config.volume ?? 30)));
   const mode = () => scene === 'candles' ? 'piano' : 'song';
   const isPlaying = () => !audio.paused && !audio.ended;
@@ -16,6 +16,7 @@
   function sync() {
     const title = titles[mode()];
     const playing = isPlaying();
+    $('sound-button').disabled = !started;
     $('sound-button').title = title;
     $('sound-button').setAttribute('aria-label', (playing ? 'Pause ' : 'Play ') + title);
     $('sound-button').setAttribute('aria-pressed', String(playing));
@@ -23,7 +24,7 @@
     status.dataset.playback = playing ? 'playing' : 'paused';
     const message = (playing ? 'Now playing: ' : 'Music: ') + title;
     if (status.textContent !== message) status.textContent = message;
-    $('audio-unlock').hidden = !wanted || playing || mode() !== 'piano';
+    $('audio-unlock').hidden = !started || !wanted || playing || mode() !== 'piano';
   }
 
   function updateGain() {
@@ -37,7 +38,7 @@
     if (loadedTheme === next) return;
     audio.pause();
     loadedTheme = next;
-    audio.autoplay = wanted;
+    audio.autoplay = false;
     audio.src = next === 'piano'
       ? 'assets/piano/happy-birthday-soft.mp3'
       : config.src || 'assets/danh-cho-em.mp3';
@@ -46,7 +47,7 @@
   }
 
   function resumeAuto() {
-    if (!wanted || document.hidden) return;
+    if (!started || !wanted || document.hidden) return;
     selectTrack();
     if (!audio.paused) return;
     // Keep play() synchronous with the page click, including on Safari/iPhone.
@@ -82,7 +83,7 @@
   audio.loop = true;
   audio.preload = 'auto';
   audio.addEventListener('playing', () => {
-    if (!wanted || document.hidden) { audio.pause(); return; }
+    if (!started || !wanted || document.hidden) { audio.pause(); return; }
     sync();
   });
   audio.addEventListener('pause', sync);
@@ -116,11 +117,19 @@
   window.addEventListener('pageshow', resumeAuto);
   window.birthdayMusic = {
     get wanted() { return wanted; }, setScene, resumeAuto, pauseTransient,
+    start() {
+      started = true;
+      wanted = true;
+      resumeAuto();
+      sync();
+    },
     duck(value) { ducked = value; updateGain(); },
     reset() {
+      started = false;
+      audio.pause();
       setScene('candles');
       audio.currentTime = 0;
-      resumeAuto();
+      sync();
     }
   };
   updateVolume();

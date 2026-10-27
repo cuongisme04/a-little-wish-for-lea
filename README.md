@@ -12,7 +12,7 @@ Edit `config.js`. It contains the name, candle count, lighting speed, birthday p
 
 Serve the repository root with any static HTTP server. Microphone access requires HTTPS or localhost. The microphone is requested only after pressing the blow button, is analyzed locally, and is released after the candles go out or when leaving the page. A tap option always works without microphone access.
 
-Music starts automatically when permitted by the browser, with a first-tap fallback. The candle page uses a native HTML audio player with autoplay enabled and a locally hosted, softly rendered Happy Birthday piano arrangement made from Salamander samples. If audible autoplay is blocked, the first tap anywhere starts it. This piano becomes quieter while listening for a blow. Entering the flower page immediately switches to the supplied MP3 of Hoàng Tôn’s Dành Cho Em; it then continues across the flower, letter, date, and Yes pages and repeats if it ends. The volume slider controls the active theme. Browser autoplay policies may require a visitor interaction; the song is served directly with the website. Explicit pause/mute choices are preserved.
+The opening page waits quietly with all 23 candles unlit. Tapping “Light my candles” starts both the candle-lighting countdown and the soft Happy Birthday piano in the same user interaction. The piano uses a native HTML audio player and a locally hosted arrangement made from Salamander samples. Restarting returns to this quiet, ready-to-begin state. This piano becomes quieter while listening for a blow. Entering the flower page immediately switches to the supplied MP3 of Hoàng Tôn’s Dành Cho Em; it then continues across the flower, letter, date, and Yes pages and repeats if it ends. The volume slider controls the active theme. Browser autoplay policies may require a visitor interaction; the song is served directly with the website. Explicit pause/mute choices are preserved.
 
 ## Share and deploy
 
@@ -36,4 +36,4 @@ The Yes button displays a celebration and offers the visitor a native share shee
 
 ## Verification
 
-The browser flow should be checked at desktop and mobile widths: countdown 23 → 0, all 23 candles lit, tap extinguishing, envelope opening, flower replay, note, moving No, Yes celebration, restart. Microphone blow detection needs a real device and microphone to verify fully.
+The browser flow should be checked at desktop and mobile widths: no lighting or audio before starting, start-button tap or keyboard activation starts piano and countdown 23 → 0, all 23 candles lit, tap extinguishing, envelope opening, flower replay, note, moving No, Yes celebration, restart. Microphone blow detection needs a real device and microphone to verify fully.

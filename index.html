@@ -17,18 +17,18 @@
   <link rel="preload" href="assets/hydrangea.webp" as="image">
   <link rel="preload" href="assets/cosmos.webp" as="image">
   <script src="config.js" defer></script>
-  <script src="music.js?v=local-music-1" defer></script>
-  <script src="app.js" defer></script>
+  <script src="music.js?v=candle-start-1" defer></script>
+  <script src="app.js?v=candle-start-1" defer></script>
 </head>
 <body>
-  <audio id="theme-audio" autoplay loop preload="auto" playsinline></audio>
+  <audio id="theme-audio" loop preload="auto" playsinline></audio>
   <div class="paper-texture" aria-hidden="true"></div>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="site-header">
     <a class="wordmark" href="#" aria-label="Restart Lea’s birthday surprise">a little wish <span>♡</span></a>
     <span class="dedication">MADE JUST FOR <span data-name>LEA</span></span>
-    <div class="music-controls"><button class="icon-button" id="sound-button" type="button" aria-label="Play Happy Birthday soft piano" aria-pressed="false" title="Happy Birthday · soft piano">
+    <div class="music-controls"><button class="icon-button" id="sound-button" type="button" aria-label="Play Happy Birthday soft piano" aria-pressed="false" title="Happy Birthday · soft piano" disabled>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg>
     </button><label class="volume-control" for="music-volume"><span class="sr-only">Theme music volume</span><input id="music-volume" type="range" min="0" max="100" step="1" value="30" aria-label="Theme music volume" aria-valuetext="30 percent"><output id="volume-value" for="music-volume">30%</output></label></div>
   </header>
@@ -52,16 +52,17 @@
         <div class="stage-caption" aria-hidden="true">BAKED WITH A LITTLE EXTRA LOVE</div>
       </div>
       <div class="candle-controls">
-        <div class="countdown" id="countdown" aria-hidden="true"><span id="remaining">23</span> <span id="countdown-label">candles left to light</span></div>
-        <div class="lighting-progress" id="lighting-progress" aria-hidden="true"><span id="lighting-bar"></span></div>
-        <p class="wish-instruction" id="wish-instruction">One little light for every lovely year.</p>
+        <div class="countdown" id="countdown" aria-hidden="true" hidden><span id="remaining">23</span> <span id="countdown-label">candles left to light</span></div>
+        <div class="lighting-progress" id="lighting-progress" aria-hidden="true" hidden><span id="lighting-bar"></span></div>
+        <p class="wish-instruction" id="wish-instruction">Ready for a little birthday magic?</p>
         <div class="control-actions">
-          <button class="primary-button" id="mic-button" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3m-3 0h6"/></svg><span id="mic-label">Lighting your candles…</span></button>
-          <button class="text-button" id="tap-blow-button" type="button" disabled>or tap to make a wish <span>↗</span></button>
+          <button class="primary-button" id="start-candles" type="button">Light my candles <span aria-hidden="true">✧</span></button>
+          <button class="primary-button" id="mic-button" type="button" disabled hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3m-3 0h6"/></svg><span id="mic-label">Lighting your candles…</span></button>
+          <button class="text-button" id="tap-blow-button" type="button" disabled hidden>or tap to make a wish <span>↗</span></button>
         </div>
         <button class="text-button continue-button" id="to-flowers" type="button" hidden>Your next little surprise <span>→</span></button>
-        <p class="micro-note" id="micro-note">No rush. This moment is yours.</p>
-        <button class="text-button audio-unlock" id="audio-unlock" type="button" hidden>Tap anywhere for birthday music ♫</button>
+        <p class="micro-note" id="micro-note">Tap to light your candles and start the music.</p>
+        <button class="text-button audio-unlock" id="audio-unlock" type="button" hidden>Tap to resume birthday music ♫</button>
       </div>
     </section>
 
