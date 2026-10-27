@@ -22,7 +22,7 @@ Hosted with GitHub Pages from the `main` branch, `/` (root). Changes pushed to `
 
 Anyone with the website URL can visit without signing in. A local preview link works only on the computer running the server.
 
-The Yes button displays a celebration and offers the visitor a native share sheet or copies a reply to paste into a message. It does not automatically send you a notification or save a response on a server.
+The Yes button displays a celebration. “Share your yes” opens an optional message form; only pressing Send saves the typed message privately to the cloud inbox. Replies are JSON files in the private `replies/` folder. The owner reads or downloads them at https://a-little-wish-for-lea.blushcreek2048.chatgpt.site/inbox after signing in with their ChatGPT account. No microphone audio is recorded or uploaded, and the public GitHub repository contains no replies or storage credentials.
 
 ## Sources and credits
 

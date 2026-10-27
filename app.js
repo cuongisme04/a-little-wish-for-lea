@@ -595,18 +595,64 @@
   $('restart-button').addEventListener('click', restart);
   document.querySelector('.wordmark').addEventListener('click', (event) => { event.preventDefault(); restart(); });
   document.querySelectorAll('.journey button').forEach((button) => button.addEventListener('click', () => showScene(button.dataset.scene)));
-  $('share-yes').addEventListener('click', async () => {
-    const text = config.yesReply || 'Yes, I’d love to! ♡';
-    if (navigator.share) {
-      try { await navigator.share({ title: 'It’s a date ♡', text }); return; }
-      catch (error) { if (error.name === 'AbortError') return; }
-    }
+  let replyId;
+  let sendingReply = false;
+  $('share-yes').addEventListener('click', () => {
+    if (!$('reply-message').value) $('reply-message').value = config.yesReply || '';
+    $('reply-error').hidden = true;
+    $('reply-dialog').showModal();
+    $('reply-message').focus();
+  });
+  $('cancel-reply').addEventListener('click', () => {
+    if (!sendingReply) $('reply-dialog').close();
+  });
+  $('reply-dialog').addEventListener('cancel', event => {
+    if (sendingReply) event.preventDefault();
+  });
+  $('reply-message').addEventListener('input', () => { if (!sendingReply) replyId = undefined; });
+  $('reply-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const message = $('reply-message').value.trim();
+    if (sendingReply || !message) return;
+    sendingReply = true;
+    replyId ||= crypto.randomUUID();
+    $('send-reply').disabled = true;
+    $('cancel-reply').disabled = true;
+    $('reply-message').disabled = true;
+    $('send-reply').textContent = 'Đang gửi…';
+    $('reply-error').hidden = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      await navigator.clipboard.writeText(text);
-      $('share-feedback').textContent = 'Your yes is copied. Paste it into a message to me. ♡';
-      announce('Reply copied. Paste it into a message to send it.');
-    } catch (error) {
-      $('share-feedback').textContent = 'Send me a screenshot, or a message saying “Yes, I’d love to!” ♡';
+      const endpoint = config.replyEndpoint;
+      if (!endpoint) throw new Error('Reply service unavailable');
+      const tokenUrl = new URL('reply-token', endpoint);
+      tokenUrl.searchParams.set('id', replyId);
+      const tokenResponse = await fetch(tokenUrl, { credentials: 'omit', signal: controller.signal });
+      if (!tokenResponse.ok) throw new Error('Could not prepare message');
+      const { token } = await tokenResponse.json();
+      const response = await fetch(endpoint, {
+        method: 'POST', credentials: 'omit', signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: replyId, token, message })
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true || result.id !== replyId) throw new Error('Message not saved');
+      $('reply-dialog').close();
+      $('share-yes').disabled = true;
+      $('share-yes').textContent = 'Đã gửi lời nhắn ♡';
+      $('share-feedback').textContent = 'Lời nhắn của chị đã được gửi rồi. Hẹn chị nhé! ♡';
+      announce('Your message was saved and sent privately.');
+    } catch {
+      $('reply-error').textContent = 'Chưa gửi được lời nhắn. Nội dung vẫn ở đây, chị thử lại nhé.';
+      $('reply-error').hidden = false;
+    } finally {
+      clearTimeout(timeout);
+      sendingReply = false;
+      $('send-reply').disabled = false;
+      $('cancel-reply').disabled = false;
+      $('reply-message').disabled = false;
+      $('send-reply').textContent = 'Gửi lời nhắn ♡';
     }
   });
   window.addEventListener('resize', () => {

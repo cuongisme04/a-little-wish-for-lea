@@ -10,15 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=letter-reply-1">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/peony.webp" as="image">
   <link rel="preload" href="assets/rose.webp" as="image">
   <link rel="preload" href="assets/hydrangea.webp" as="image">
   <link rel="preload" href="assets/cosmos.webp" as="image">
-  <script src="config.js" defer></script>
+  <script src="config.js?v=letter-reply-1" defer></script>
   <script src="music.js?v=candle-start-1" defer></script>
-  <script src="app.js?v=candle-start-1" defer></script>
+  <script src="app.js?v=letter-reply-1" defer></script>
 </head>
 <body>
   <audio id="theme-audio" loop preload="auto" playsinline></audio>
@@ -89,15 +89,15 @@
       <div class="flower-bottom" id="flower-bottom" hidden><p class="handwritten">May your year bloom beautifully.</p><div class="inline-actions"><button class="primary-button" id="to-letter" type="button">There’s a note for you <span>→</span></button><button class="text-button" id="replay-flowers" type="button">Watch them fly again <span>↻</span></button></div></div>
     </section>
 
-    <section class="scene letter-scene" id="scene-letter" aria-labelledby="letter-title" hidden>
-      <div class="eyebrow"><span></span> FROM ME, TO YOU <span></span></div>
-      <h1 id="letter-title" tabindex="-1">A few words, <em>from the heart.</em></h1>
+    <section class="scene letter-scene" id="scene-letter" aria-labelledby="letter-title" lang="vi" hidden>
+      <div class="eyebrow"><span></span> MỘT CHÚT TÂM Ý <span></span></div>
+      <h1 id="letter-title" tabindex="-1">Đôi lời <em>gửi chị.</em></h1>
       <article class="letter-paper">
         <img class="letter-flower" src="assets/rose.webp" alt="" width="150" height="150">
-        <span class="letter-date">CHAPTER TWENTY-THREE</span>
-        <h2 class="handwritten">Happy birthday, <span data-name>Lea</span> ♡</h2>
-        <div id="birthday-message"><p>I hope 23 brings you the kind of happiness that sneaks up on you — little adventures, lovely surprises, and plenty of reasons to smile.</p><p>You make ordinary moments feel a little brighter. So I wanted to make something that might do the same for you.</p><p>Here’s to a year as lovely as you are, with a little extra pink along the way.</p></div>
-        <p class="letter-signature handwritten" id="signature">Someone who wanted to make you smile</p>
+        <span class="letter-date">TUỔI HAI MƯƠI BA</span>
+        <h2 class="handwritten">Chúc mừng sinh nhật, chị <span data-name>Lea</span> ♡</h2>
+        <div id="birthday-message"><p>Em xin lỗi vì không thể qua chúc mừng sinh nhật chị trực tiếp được. Vậy nên em gửi một chút tâm ý của mình vào món quà nhỏ này, cùng những lời chúc em muốn dành riêng cho chị.</p><p>Em mong món quà nhỏ vào cuối ngày sinh nhật này sẽ mang đến cho chị thêm một niềm vui, để ngày đặc biệt của chị khép lại thật ấm áp và hạnh phúc.</p><p>Bước sang tuổi 23, em chúc chị luôn tỏa sáng và giữ được nguồn năng lượng tích cực, đáng yêu ấy. Mong chị sẽ gặp thật nhiều điều tốt đẹp, làm được những điều mình thích và có thật nhiều lý do để mỉm cười.</p><p>Và mong nụ cười ấm áp của chị sẽ luôn nở tươi như những đóa hoa này vậy, hehe. Chúc chị một tuổi mới thật dịu dàng và rực rỡ nhé! ♡</p></div>
+        <p class="letter-signature handwritten" id="signature">Một chút tâm ý của em ♡</p>
         <span class="letter-heart" aria-hidden="true">♡</span>
       </article>
       <button class="primary-button" id="to-date" type="button">One more little thing… <span>→</span></button>
@@ -118,10 +118,22 @@
       <div class="yes-heart" aria-hidden="true">♡<span>✦</span><i>✧</i></div>
       <h1 id="yes-title" tabindex="-1">You just made <em>my day.</em></h1>
       <p class="intro">Happy birthday, <span data-name>Lea</span>. I’m looking forward to celebrating with you.</p>
-      <div class="reply-note"><p>Send me a little “yes” so we can pick a day. ♡</p><button class="primary-button" id="share-yes" type="button">Share your yes <span>↗</span></button><p class="micro-note" id="share-feedback">Or send me a screenshot of this little moment.</p></div>
+      <div class="reply-note"><p>Send me a little “yes” so we can pick a day. ♡</p><button class="primary-button" id="share-yes" type="button">Share your yes <span>↗</span></button><p class="micro-note" id="share-feedback" role="status">Write me a little message. Only send it when you’re ready. ♡</p></div>
       <button class="text-button" id="restart-button" type="button">A little birthday magic, once more <span>↻</span></button>
     </section>
   </main>
+  <dialog id="reply-dialog" class="reply-dialog" aria-labelledby="reply-title" lang="vi">
+    <form id="reply-form">
+      <div class="eyebrow">MỘT LỜI NHẮN TỪ CHỊ</div>
+      <h2 id="reply-title">Gửi em vài lời nhé? ♡</h2>
+      <p>Lời nhắn này sẽ được gửi riêng cho em, để mình cùng chọn một ngày đi chơi nhé.</p>
+      <label for="reply-message">Lời nhắn của chị</label>
+      <textarea id="reply-message" name="message" rows="5" maxlength="1500" required placeholder="Chị muốn nhắn em điều gì nè?"></textarea>
+      <p id="reply-error" class="reply-error" role="alert" hidden></p>
+      <div class="inline-actions"><button class="primary-button" id="send-reply" type="submit">Gửi lời nhắn <span aria-hidden="true">♡</span></button><button class="text-button" id="cancel-reply" type="button">Để sau nhé</button></div>
+      <p class="micro-note">Chỉ gửi khi chị bấm “Gửi lời nhắn”.</p>
+    </form>
+  </dialog>
   <footer class="site-footer"><span>FOR YOUR TWENTY-THIRD TRIP AROUND THE SUN</span><nav class="journey" aria-label="Your birthday journey"><button type="button" data-scene="candles" aria-label="Candles" aria-current="step"><span></span><i>the wish</i></button><button type="button" data-scene="flowers" aria-label="Flowers" disabled><span></span><i>the flowers</i></button><button type="button" data-scene="letter" aria-label="Birthday note" disabled><span></span><i>the note</i></button><button type="button" data-scene="date" aria-label="Date invitation" disabled><span></span><i>the question</i></button></nav><span class="footer-heart" aria-hidden="true">♡</span></footer>
   <div class="flower-flight" id="flower-flight" aria-hidden="true"></div><div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
   <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
