@@ -1,0 +1,6 @@
+Salamander Grand Piano samples by Alexander Holm, licensed CC BY 3.0.
+License: https://creativecommons.org/licenses/by/3.0/
+Source collection: https://github.com/Tonejs/audio/tree/master/salamander
+Original license/readme: https://raw.githubusercontent.com/Tonejs/audio/master/salamander/README
+
+The website uses selected samples with pitch shifting, softer gain and a new gentle arrangement of the traditional Happy Birthday melody. These changes and the website arrangement are separate from the original samples.

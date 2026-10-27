@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf3ee">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Twenty-three candles and a little birthday magic, just for Lea.">
+  <title>A little wish for Lea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/peony.webp" as="image">
+  <link rel="preload" href="assets/rose.webp" as="image">
+  <link rel="preload" href="assets/hydrangea.webp" as="image">
+  <link rel="preload" href="assets/cosmos.webp" as="image">
+  <script src="config.js" defer></script>
+  <script src="music.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <audio id="birthday-piano" autoplay loop preload="auto" playsinline></audio>
+  <div class="paper-texture" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="#" aria-label="Restart Lea’s birthday surprise">a little wish <span>♡</span></a>
+    <span class="dedication">MADE JUST FOR <span data-name>LEA</span></span>
+    <div class="music-controls"><button class="icon-button" id="sound-button" type="button" aria-label="Play Happy Birthday soft piano" aria-pressed="false" aria-controls="music-panel" aria-expanded="false" title="Happy Birthday · soft piano">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg>
+    </button><label class="volume-control" for="music-volume"><span class="sr-only">Theme music volume</span><input id="music-volume" type="range" min="0" max="100" step="1" value="30" aria-label="Theme music volume" aria-valuetext="30 percent"><output id="volume-value" for="music-volume">30%</output></label></div>
+  </header>
+  <aside class="music-panel" id="music-panel" aria-labelledby="music-title" hidden><div class="music-panel-heading"><div><span class="music-kicker">A SONG FOR YOU</span><h2 id="music-title">Dành Cho Em</h2><p>Hoàng Tôn</p></div><button id="close-music" class="music-close" type="button" aria-label="Close music player and pause">×</button></div><div class="song-player-shell"><div id="song-player"></div></div><p class="music-status" id="music-status" role="status">Opening your song…</p><a class="music-source" href="https://soundcloud.com/nhoangton/danh-cho-em-full" target="_blank" rel="noopener noreferrer">Listen on SoundCloud ↗</a></aside>
+  <main id="main">
+    <section class="scene active candle-scene" id="scene-candles" aria-labelledby="candle-title">
+      <div class="eyebrow"><span></span> YOUR BIRTHDAY STARTS HERE <span></span></div>
+      <h1 id="candle-title" tabindex="-1">Make a wish, <em data-name>Lea.</em></h1>
+      <p class="intro">Twenty-three little lights. A whole new year of you.</p>
+      <div class="cake-stage">
+        <span class="handwritten cake-annotation">a little magic<br>for your 23rd <svg viewBox="0 0 60 70" fill="none" aria-hidden="true"><path d="M5 4c-3 35 34 23 38 52m-10-7 11 10 10-12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        <span class="stage-sparkle sparkle-one" aria-hidden="true">✧</span><span class="stage-sparkle sparkle-two" aria-hidden="true">✦</span><span class="stage-sparkle sparkle-three" aria-hidden="true">✧</span>
+        <div class="cake-halo" aria-hidden="true"></div>
+        <div class="cake-wrap">
+          <div class="cake" role="img" aria-label="A pink birthday cake with 23 candles">
+            <div class="plate"></div><div class="layer layer-bottom"></div><div class="layer layer-middle"></div><div class="layer layer-top"></div>
+            <div class="icing"></div><div class="drip drip-one"></div><div class="drip drip-two"></div><div class="drip drip-three"></div>
+            <div class="cake-heart" aria-hidden="true">♡</div><div id="candles" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="stage-caption" aria-hidden="true">BAKED WITH A LITTLE EXTRA LOVE</div>
+      </div>
+      <div class="candle-controls">
+        <div class="countdown" id="countdown" aria-hidden="true"><span id="remaining">23</span> <span id="countdown-label">candles left to light</span></div>
+        <div class="lighting-progress" id="lighting-progress" aria-hidden="true"><span id="lighting-bar"></span></div>
+        <p class="wish-instruction" id="wish-instruction">One little light for every lovely year.</p>
+        <div class="control-actions">
+          <button class="primary-button" id="mic-button" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3m-3 0h6"/></svg><span id="mic-label">Lighting your candles…</span></button>
+          <button class="text-button" id="tap-blow-button" type="button" disabled>or tap to make a wish <span>↗</span></button>
+        </div>
+        <button class="text-button continue-button" id="to-flowers" type="button" hidden>Your next little surprise <span>→</span></button>
+        <p class="micro-note" id="micro-note">No rush. This moment is yours.</p>
+        <button class="text-button audio-unlock" id="audio-unlock" type="button" hidden>Tap anywhere for birthday music ♫</button>
+      </div>
+    </section>
+
+    <section class="scene flower-scene" id="scene-flowers" aria-labelledby="flower-title" hidden>
+      <div class="eyebrow"><span></span> A SPECIAL DELIVERY <span></span></div>
+      <h1 id="flower-title" tabindex="-1">A little pink, <em>just for you.</em></h1>
+      <p class="intro" id="flower-intro">Because a birthday deserves flowers that last.</p>
+      <div class="flower-stage" id="flower-stage">
+        <div class="envelope-scene" id="envelope-scene">
+          <span class="handwritten envelope-annotation">psst…<br>this one's for you ♡</span>
+          <button class="envelope" id="open-envelope" type="button" aria-label="Open Lea’s flower envelope">
+            <span class="envelope-back"></span><span class="envelope-letter"><span class="handwritten">For <span data-name>Lea</span></span><span>A little birthday bloom</span></span><span class="envelope-front"></span><span class="envelope-flap"></span><span class="wax-seal">L</span>
+          </button>
+          <p class="envelope-hint">TAP THE ENVELOPE TO OPEN</p>
+        </div>
+        <div class="bouquet" id="bouquet" hidden role="img" aria-label="A textured pastel pink bouquet of peonies, roses, hydrangeas and cosmos, wrapped in paper and tied with a pink ribbon">
+          <div class="bouquet-stems" aria-hidden="true"></div><div class="bouquet-paper paper-back" aria-hidden="true"></div>
+          <div class="bouquet-leaves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="bouquet-blooms" id="bouquet-blooms" aria-hidden="true"></div>
+          <div class="bouquet-paper paper-front" aria-hidden="true"></div><div class="bouquet-ribbon" aria-hidden="true"><i></i><i></i><b></b></div>
+          <div class="bouquet-tag"><span class="handwritten">For <span data-name>Lea</span></span><span>WITH A LITTLE EXTRA PINK</span></div>
+        </div>
+      </div>
+      <div class="flower-bottom" id="flower-bottom" hidden><p class="handwritten">May your year bloom beautifully.</p><div class="inline-actions"><button class="primary-button" id="to-letter" type="button">There’s a note for you <span>→</span></button><button class="text-button" id="replay-flowers" type="button">Watch them fly again <span>↻</span></button></div></div>
+    </section>
+
+    <section class="scene letter-scene" id="scene-letter" aria-labelledby="letter-title" hidden>
+      <div class="eyebrow"><span></span> FROM ME, TO YOU <span></span></div>
+      <h1 id="letter-title" tabindex="-1">A few words, <em>from the heart.</em></h1>
+      <article class="letter-paper">
+        <img class="letter-flower" src="assets/rose.webp" alt="" width="150" height="150">
+        <span class="letter-date">CHAPTER TWENTY-THREE</span>
+        <h2 class="handwritten">Happy birthday, <span data-name>Lea</span> ♡</h2>
+        <div id="birthday-message"><p>I hope 23 brings you the kind of happiness that sneaks up on you — little adventures, lovely surprises, and plenty of reasons to smile.</p><p>You make ordinary moments feel a little brighter. So I wanted to make something that might do the same for you.</p><p>Here’s to a year as lovely as you are, with a little extra pink along the way.</p></div>
+        <p class="letter-signature handwritten" id="signature">Someone who wanted to make you smile</p>
+        <span class="letter-heart" aria-hidden="true">♡</span>
+      </article>
+      <button class="primary-button" id="to-date" type="button">One more little thing… <span>→</span></button>
+    </section>
+
+    <section class="scene date-scene" id="scene-date" aria-labelledby="date-title" hidden>
+      <div class="eyebrow"><span></span> MY LAST LITTLE WISH <span></span></div>
+      <div class="date-illustration" aria-hidden="true"><span class="cup cup-one"><i></i></span><span class="cup cup-two"><i></i></span><b>♡</b></div>
+      <h1 id="date-title" tabindex="-1">Birthday girl, <em>it’s a date?</em></h1>
+      <p class="date-question" id="date-question">Can I take you out for your birthday?</p>
+      <p class="intro" id="date-detail">Something sweet, a little adventure, and you.</p>
+      <div class="answer-arena" id="answer-arena"><button class="primary-button yes-button" id="yes-button" type="button">Yes, I’d love to <span>♡</span></button><button class="no-button" id="no-button" type="button" aria-label="No" data-escape-state="waiting">No</button></div>
+      <p class="playful-caption handwritten" id="playful-caption">My last little birthday wish. ♡</p>
+    </section>
+
+    <section class="scene yes-scene" id="scene-yes" aria-labelledby="yes-title" hidden>
+      <div class="eyebrow"><span></span> THE SWEETEST ANSWER <span></span></div>
+      <div class="yes-heart" aria-hidden="true">♡<span>✦</span><i>✧</i></div>
+      <h1 id="yes-title" tabindex="-1">You just made <em>my day.</em></h1>
+      <p class="intro">Happy birthday, <span data-name>Lea</span>. I’m looking forward to celebrating with you.</p>
+      <div class="reply-note"><p>Send me a little “yes” so we can pick a day. ♡</p><button class="primary-button" id="share-yes" type="button">Share your yes <span>↗</span></button><p class="micro-note" id="share-feedback">Or send me a screenshot of this little moment.</p></div>
+      <button class="text-button" id="restart-button" type="button">A little birthday magic, once more <span>↻</span></button>
+    </section>
+  </main>
+  <footer class="site-footer"><span>FOR YOUR TWENTY-THIRD TRIP AROUND THE SUN</span><nav class="journey" aria-label="Your birthday journey"><button type="button" data-scene="candles" aria-label="Candles" aria-current="step"><span></span><i>the wish</i></button><button type="button" data-scene="flowers" aria-label="Flowers" disabled><span></span><i>the flowers</i></button><button type="button" data-scene="letter" aria-label="Birthday note" disabled><span></span><i>the note</i></button><button type="button" data-scene="date" aria-label="Date invitation" disabled><span></span><i>the question</i></button></nav><span class="footer-heart" aria-hidden="true">♡</span></footer>
+  <div class="flower-flight" id="flower-flight" aria-hidden="true"></div><div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+</body>
+</html>
